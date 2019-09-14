@@ -1,0 +1,27 @@
+:host {
+    display: flex;
+    flex: 1;
+}
+
+.page-container {
+    margin: 1em 0;
+    // height: 100%;
+}
+
+.mat-progress-spinner {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+mat-drawer-container {
+    flex: 1;
+    mat-drawer.sidenav {
+        width: 300px;
+    }
+}
+
+.sidenav {
+    mat-card {
+        margin: 0.5em;
+    }
+}

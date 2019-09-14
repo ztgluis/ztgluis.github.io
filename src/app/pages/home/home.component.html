@@ -1,0 +1,47 @@
+<mat-drawer-container class="sidenav-container" autosize>
+    <mat-drawer
+        class="sidenav"
+        mode="side"
+        [opened]="sidenavOpen && mediaObserver.isActive('gt-sm')"
+    >
+        <mat-spinner
+            *ngIf="loading"
+            class="mx-auto my-5 d-block"
+            [diameter]="22"
+            [strokeWidth]="2"
+        ></mat-spinner>
+    </mat-drawer>
+
+    <mat-drawer-content>
+        <div class="page-container">
+            <mat-card>
+                <mat-card-title>Introduction</mat-card-title>
+                <mat-card-content>
+                    <p>
+                        Personal Portfolio Page
+                    </p>
+                </mat-card-content>
+            </mat-card>
+
+            <mat-card>
+                <mat-card-title>Features</mat-card-title>
+                <div *ngFor="let feature of features" class="my-4">
+                    <mat-card-subtitle>{{ feature.title }}</mat-card-subtitle>
+                    <mat-card-content>
+                        {{ feature.description }}
+                    </mat-card-content>
+                </div>
+            </mat-card>
+
+            <mat-card>
+                <mat-card-title>Development</mat-card-title>
+                <div *ngFor="let feature of devFeatures" class="my-4">
+                    <mat-card-subtitle>{{ feature.title }}</mat-card-subtitle>
+                    <mat-card-content>
+                        {{ feature.description }}
+                    </mat-card-content>
+                </div>
+            </mat-card>
+        </div>
+    </mat-drawer-content>
+</mat-drawer-container>

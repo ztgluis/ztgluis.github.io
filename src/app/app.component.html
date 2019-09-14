@@ -1,0 +1,90 @@
+<div class="wrapper" *ngIf="mediaObserver$ | async">
+    <!-- Header -->
+    <mat-toolbar color="primary">
+        <!-- Responsive Title -->
+        <div
+            *ngIf="
+                mediaObserver.isActive('gt-xs');
+                then title;
+                else responsiveTitle
+            "
+        ></div>
+        <ng-template #title>
+            <button mat-button [routerLink]="['/']">
+                Luis Michel Gutierrez
+            </button>
+        </ng-template>
+        <ng-template #responsiveTitle>
+            <button mat-button [routerLink]="['/']">Luis</button>
+        </ng-template>
+
+        <!-- Toolbar Buttons -->
+        <div class="ml-auto">
+            <!-- Layout Based Navigation-->
+            <button
+                *ngFor="let link of navLinks"
+                mat-button
+                [matTooltip]="link.name"
+                [routerLink]="link.path"
+                [routerLinkActiveOptions]="{ exact: true }"
+                routerLinkActive="bg-accent"
+            >
+                <!-- Responsive Navigation Items -->
+                <div
+                    *ngIf="
+                        mediaObserver.isActive('gt-sm');
+                        then navItems;
+                        else responsiveNavItems
+                    "
+                ></div>
+                <ng-template #navItems>
+                    <span>{{ link.name }}</span>
+                </ng-template>
+                <ng-template #responsiveNavItems>
+                    <mat-icon>{{ link.icon }}</mat-icon>
+                </ng-template>
+            </button>
+
+            <!-- Responsive Settings Menu -->
+            <div
+                *ngIf="
+                    mediaObserver.isActive('gt-sm');
+                    then settingsMenu;
+                    else responsiveSettingsMenu
+                "
+            ></div>
+            <div class="d-inline-block">
+                <button
+                    mat-icon-button
+                    (click)="switchTheme()"
+                    matTooltip="Switch Theme"
+                >
+                    <mat-icon>color_lens</mat-icon>
+                </button>
+            </div>
+
+            <!-- Github link -->
+            <a
+                mat-icon-button
+                href="https://github.com/ztgluis/ztgluis-github-io"
+            >
+                <mat-icon svgIcon="github"></mat-icon>
+            </a>
+        </div>
+    </mat-toolbar>
+
+    <div class="main-container mat-app-background">
+        <router-outlet></router-outlet>
+    </div>
+
+    <!-- Footer -->
+    <mat-toolbar color="primary">
+        <div class="lead m-auto">
+            <span class="d-flex align-items-center">
+                Built with
+                <mat-icon class="mx-1 text-warn">favorite</mat-icon>
+                by Skynet
+            </span>
+        </div>
+    </mat-toolbar>
+</div>

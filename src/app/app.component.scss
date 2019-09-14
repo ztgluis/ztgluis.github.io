@@ -1,0 +1,15 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+}
+.main-container {
+    display: flex;
+    flex: 1;
+    // height: calc(100% - 64px); // 64px for each toolbar (header and footer)
+}
+
+// Properly align menu icon with nav icons
+.mat-toolbar-single-row {
+    padding: 0 13px;
+}
