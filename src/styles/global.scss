@@ -30,8 +30,3 @@ body {
         vertical-align: unset; // fix svg icons vertical align
     }
 }
-
-// Ensure Google Maps info window is displayed correctly on dark themes
-.agm-info-window-content {
-    color: black;
-}

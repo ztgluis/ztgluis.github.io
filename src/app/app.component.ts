@@ -8,7 +8,7 @@ import { SettingsService } from '@app/shared/services/settings.service';
 import { Observable } from 'rxjs';
 
 @Component({
-    selector: 'ftc-root',
+    selector: 'zgi-root',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush

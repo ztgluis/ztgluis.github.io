@@ -4,28 +4,28 @@ $theme-accent: map-get($theme, accent);
 $theme-warn: map-get($theme, warn);
 
 /* Map specific colors to application variables */
-$ftc-primary: mat-color($primary-palette);
-$ftc-accent: mat-color($accent-palette);
-$ftc-info: mat-color($info-palette);
-$ftc-success: mat-color($success-palette);
-$ftc-warn: mat-color($warn-palette);
-$ftc-light: mat-color($light-palette);
-$ftc-dark: mat-color($neutral-palette);
+$zgi-primary: mat-color($primary-palette);
+$zgi-accent: mat-color($accent-palette);
+$zgi-info: mat-color($info-palette);
+$zgi-success: mat-color($success-palette);
+$zgi-warn: mat-color($warn-palette);
+$zgi-light: mat-color($light-palette);
+$zgi-dark: mat-color($neutral-palette);
 
 /**
  * Map used by bootstrap to set theming colors
  * Override default colors with Material theme
  */
 $theme-colors: (
-    primary: $ftc-primary,
-    secondary: $ftc-accent,
-    accent: $ftc-accent,
-    info: $ftc-info,
-    success: $ftc-success,
-    danger: $ftc-warn,
-    warn: $ftc-warn,
-    light: $ftc-light,
-    dark: $ftc-dark
+    primary: $zgi-primary,
+    secondary: $zgi-accent,
+    accent: $zgi-accent,
+    info: $zgi-info,
+    success: $zgi-success,
+    danger: $zgi-warn,
+    warn: $zgi-warn,
+    light: $zgi-light,
+    dark: $zgi-dark
 );
 
 /**

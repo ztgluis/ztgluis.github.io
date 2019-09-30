@@ -1,6 +1,6 @@
-# Luis Michel Gutierrez
+# Resume / Portfolio
 
-Portfolio page, `dev` branch will contain the source code, building the app will be pushed to `master` for the actual portolio page.
+This repo has been created to be the main source for references for my profile and portfolio. The `dev` branch will contain the source code, the resulting app will be pushed to `master` for the actual Github Page to be showin in [https://ztgluis.github.io/](https://ztgluis.github.io/).
 
 # Tech Stack
 

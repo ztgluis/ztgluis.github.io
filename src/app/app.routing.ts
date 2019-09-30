@@ -14,16 +14,16 @@ interface CustomRoute extends Route {
 export const appRoutes: CustomRoute[] = [
     {
         path: '',
-        redirectTo: 'home',
+        redirectTo: 'resume',
         pathMatch: 'full'
     },
     {
-        path: 'home',
+        path: 'resume',
         loadChildren: () =>
-            import('./pages/home/home.module').then(m => m.HomeModule),
+            import('./pages/resume/resume.module').then(m => m.ResumeModule),
         data: {
-            title: 'Home Page',
-            name: 'Home',
+            title: 'Resume Page',
+            name: 'Resume',
             icon: 'info'
         }
     }

@@ -2,11 +2,11 @@ import { Component } from '@angular/core';
 import { MediaChange, MediaObserver } from '@angular/flex-layout';
 import { Observable } from 'rxjs';
 @Component({
-    selector: 'ftc-home',
-    templateUrl: './home.component.html',
-    styleUrls: ['./home.component.scss']
+    selector: 'zgi-resume',
+    templateUrl: './resume.component.html',
+    styleUrls: ['./resume.component.scss']
 })
-export class HomeComponent {
+export class ResumeComponent {
     // Loading indicator
     loading: boolean;
 
@@ -16,6 +16,11 @@ export class HomeComponent {
     mediaObserver$: Observable<
         MediaChange[]
     > = this.mediaObserver.asObservable();
+
+    intro = {
+        title: 'Resume',
+        description: ''
+    };
 
     features = [
         {
