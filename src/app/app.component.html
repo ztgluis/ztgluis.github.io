@@ -11,7 +11,7 @@
         ></div>
         <ng-template #title>
             <button mat-button [routerLink]="['/']">
-                Luis Michel Gutierrez
+                Luis Gutierrez
             </button>
         </ng-template>
         <ng-template #responsiveTitle>
@@ -20,31 +20,6 @@
 
         <!-- Toolbar Buttons -->
         <div class="ml-auto">
-            <!-- Layout Based Navigation-->
-            <button
-                *ngFor="let link of navLinks"
-                mat-button
-                [matTooltip]="link.name"
-                [routerLink]="link.path"
-                [routerLinkActiveOptions]="{ exact: true }"
-                routerLinkActive="bg-accent"
-            >
-                <!-- Responsive Navigation Items -->
-                <div
-                    *ngIf="
-                        mediaObserver.isActive('gt-sm');
-                        then navItems;
-                        else responsiveNavItems
-                    "
-                ></div>
-                <ng-template #navItems>
-                    <span>{{ link.name }}</span>
-                </ng-template>
-                <ng-template #responsiveNavItems>
-                    <mat-icon>{{ link.icon }}</mat-icon>
-                </ng-template>
-            </button>
-
             <!-- Responsive Settings Menu -->
             <div
                 *ngIf="

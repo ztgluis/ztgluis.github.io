@@ -1,47 +1,48 @@
 <mat-drawer-container class="sidenav-container" autosize>
-    <mat-drawer
-        class="sidenav"
-        mode="side"
-        [opened]="sidenavOpen && mediaObserver.isActive('gt-sm')"
-    >
-        <mat-spinner
-            *ngIf="loading"
-            class="mx-auto my-5 d-block"
-            [diameter]="22"
-            [strokeWidth]="2"
-        ></mat-spinner>
+    <mat-drawer class="sidenav" mode="side" opened>
+        <mat-card>
+            <mat-card-content>
+                <img
+                    src="https://avatars3.githubusercontent.com/u/25552995?s=235&v=4"
+                />
+                <div class="lead">Luis Gutierrez</div>
+                <p>
+                    Software Engineering Manager with strong background on
+                    Front-End Development and over 10 years of experience
+                    delivering web applications ranging from public-facing
+                    eCommerce websites to internal-use Cyber Security platforms.
+                </p>
+                <p>
+                    Passionate about solving problems through technology,
+                    leading software engineers to build best-in-class enterprise
+                    applications and empower users with thoughtfully crafted
+                    experiences.
+                </p>
+                <p>
+                    Feel free to connect if you would like to collaborate or are
+                    seeking Software Development opportunities! One
+                </p>
+            </mat-card-content>
+        </mat-card>
     </mat-drawer>
 
     <mat-drawer-content>
         <div class="page-container">
-            <mat-card>
-                <mat-card-title>Introduction</mat-card-title>
-                <mat-card-content>
-                    <p>
-                        Personal Resume Page
-                    </p>
-                </mat-card-content>
-            </mat-card>
+            Work Experience
+            <mat-accordion multi>
+                <mat-expansion-panel
+                    *ngFor="let experience of workExperience"
+                    expanded
+                >
+                    <mat-expansion-panel-header>
+                        {{ experience.company }} {{ experience.title }}
+                    </mat-expansion-panel-header>
 
-            <mat-card>
-                <mat-card-title>Features</mat-card-title>
-                <div *ngFor="let feature of features" class="my-4">
-                    <mat-card-subtitle>{{ feature.title }}</mat-card-subtitle>
-                    <mat-card-content>
-                        {{ feature.description }}
-                    </mat-card-content>
-                </div>
-            </mat-card>
-
-            <mat-card>
-                <mat-card-title>Development</mat-card-title>
-                <div *ngFor="let feature of devFeatures" class="my-4">
-                    <mat-card-subtitle>{{ feature.title }}</mat-card-subtitle>
-                    <mat-card-content>
-                        {{ feature.description }}
-                    </mat-card-content>
-                </div>
-            </mat-card>
+                    <ng-template matExpansionPanelContent>
+                        {{ experience.description }}
+                    </ng-template>
+                </mat-expansion-panel>
+            </mat-accordion>
         </div>
     </mat-drawer-content>
 </mat-drawer-container>

@@ -5,7 +5,6 @@
 
 .page-container {
     margin: 1em 0;
-    // height: 100%;
 }
 
 .mat-progress-spinner {
@@ -14,14 +13,13 @@
 }
 
 mat-drawer-container {
-    flex: 1;
+    .mat-drawer {
+        background: transparent;
+    }
+    .mat-drawer-side {
+        border-right: none;
+    }
     mat-drawer.sidenav {
         width: 300px;
-    }
-}
-
-.sidenav {
-    mat-card {
-        margin: 0.5em;
     }
 }
