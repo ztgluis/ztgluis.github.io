@@ -28,18 +28,52 @@
 
     <mat-drawer-content>
         <div class="page-container">
-            Work Experience
             <mat-accordion multi>
                 <mat-expansion-panel
-                    *ngFor="let experience of workExperience"
+                    *ngFor="let section of sections | async"
                     expanded
                 >
                     <mat-expansion-panel-header>
-                        {{ experience.company }} {{ experience.title }}
+                        <h5>{{ section.title }}</h5>
                     </mat-expansion-panel-header>
 
                     <ng-template matExpansionPanelContent>
-                        {{ experience.description }}
+                        <div
+                            *ngIf="
+                                section.title === 'Skills';
+                                then skills;
+                                else experience
+                            "
+                        ></div>
+                        <ng-template #skills>
+                            <span
+                                class="m-2"
+                                *ngFor="let content of section.contents"
+                            >
+                                <button mat-button>{{ content }}</button>
+                            </span>
+                        </ng-template>
+                        <ng-template #experience>
+                            <div *ngFor="let content of section.contents">
+                                <h5>{{ content.title }}</h5>
+                                <div>
+                                    <strong>{{ content.subtitle }}</strong>
+                                </div>
+                                <div class="text-muted">
+                                    {{ content.startDate }} -
+                                    {{ content.endDate }}
+                                </div>
+                                <ul class="mt-3">
+                                    <li
+                                        *ngFor="
+                                            let bulletpoint of content.bulletpoints
+                                        "
+                                    >
+                                        {{ bulletpoint }}
+                                    </li>
+                                </ul>
+                            </div>
+                        </ng-template>
                     </ng-template>
                 </mat-expansion-panel>
             </mat-accordion>

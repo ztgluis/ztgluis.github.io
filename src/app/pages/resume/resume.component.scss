@@ -3,8 +3,12 @@
     flex: 1;
 }
 
+ul {
+    padding-inline-start: 20px;
+}
+
 .page-container {
-    margin: 1em 0;
+    margin: 1em 0.1em;
 }
 
 .mat-progress-spinner {
@@ -13,6 +17,7 @@
 }
 
 mat-drawer-container {
+    flex: 0.99; // extends the width of mat drawer to fill screen (instead of adjusting to content)
     .mat-drawer {
         background: transparent;
     }
