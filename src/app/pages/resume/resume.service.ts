@@ -5,6 +5,27 @@ import { toArray } from 'rxjs/operators';
     providedIn: 'root'
 })
 export class ResumeService {
+    projects = {
+        title: 'Projects',
+        contents: [
+            {
+                title: 'Food Truck Finder',
+                subtitle: 'https://ztgluis.github.io/food-truck-challenge',
+                bulletpoints: [
+                    `This project is a coding challenge with the objective to help anyone in San Francisco find the five closest food trucks to them`
+                ]
+            },
+            {
+                title: 'Angular Starter with Bootstrap + Material Design',
+                subtitle:
+                    'https://ztgluis.github.io/angular-bootstrap-material-starter',
+                bulletpoints: [
+                    `This project is an Angular starter pack with a robust set of configurations and features integrating Angular Material and Bootstrap to enable quick scaffolding of the project`
+                ]
+            }
+        ]
+    };
+
     workExperience = {
         title: 'Work Experience',
         contents: [
@@ -136,7 +157,7 @@ export class ResumeService {
             'SASS',
             'HTML',
             'Bootstrap',
-            'MongoDb',
+            'MongoDB',
             'Material Design',
             'Amazon Web Services (AWS)',
             'Node.js',
@@ -157,9 +178,10 @@ export class ResumeService {
 
     getSections(): Observable<any> {
         return concat(
+            of(this.skills),
+            of(this.projects),
             of(this.workExperience),
-            of(this.education),
-            of(this.skills)
+            of(this.education)
         ).pipe(toArray());
     }
 }

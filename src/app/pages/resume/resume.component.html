@@ -57,9 +57,26 @@
                             <div *ngFor="let content of section.contents">
                                 <h5>{{ content.title }}</h5>
                                 <div>
-                                    <strong>{{ content.subtitle }}</strong>
+                                    <div
+                                        *ngIf="
+                                            section.title === 'Projects';
+                                            then link;
+                                            else noLink
+                                        "
+                                    ></div>
+                                    <ng-template #link>
+                                        <a [href]="content.subtitle">
+                                            {{ content.subtitle }}
+                                        </a>
+                                    </ng-template>
+                                    <ng-template #noLink>
+                                        <strong>{{ content.subtitle }}</strong>
+                                    </ng-template>
                                 </div>
-                                <div class="text-muted">
+                                <div
+                                    class="text-muted"
+                                    *ngIf="content.startDate"
+                                >
                                     {{ content.startDate }} -
                                     {{ content.endDate }}
                                 </div>
