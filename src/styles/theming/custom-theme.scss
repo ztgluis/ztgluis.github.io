@@ -6,27 +6,27 @@
  * http://mcg.mbitson.com/
  */
 
-$custom-pink: (
-    50: #f7e6f5,
-    100: #ebc1e6,
-    200: #dd98d5,
-    300: #cf6ec4,
-    400: #c54fb8,
-    500: #bb30ab,
-    600: #b52ba4,
-    700: #ac249a,
-    800: #a41e91,
-    900: #961380,
-    A100: #ffc9f5,
-    A200: #ff96ec,
-    A400: #ff63e3,
-    A700: #ff49de,
+$custom-primary: (
+    50: #e9f0f1,
+    100: #c7d9dd,
+    200: #a2c0c7,
+    300: #7da7b0,
+    400: #61949f,
+    500: #45818e,
+    600: #3e7986,
+    700: #366e7b,
+    800: #2e6471,
+    900: #1f515f,
+    A100: #9fe9ff,
+    A200: #6cddff,
+    A400: #39d2ff,
+    A700: #1fccff,
     contrast: (
         50: #000000,
         100: #000000,
         200: #000000,
         300: #000000,
-        400: #ffffff,
+        400: #000000,
         500: #ffffff,
         600: #ffffff,
         700: #ffffff,
@@ -39,7 +39,7 @@ $custom-pink: (
     )
 );
 
-$custom-green: (
+$custom-accent: (
     50: #f5fcea,
     100: #e5f7cb,
     200: #d4f2a9,
@@ -72,7 +72,7 @@ $custom-green: (
     )
 );
 
-$custom-orange: (
+$custom-warn: (
     50: #fcf1ea,
     100: #f7ddcb,
     200: #f2c6a9,
@@ -105,9 +105,9 @@ $custom-orange: (
     )
 );
 
-$primary-palette: mat-palette($custom-pink);
-$accent-palette: mat-palette($custom-green);
-$warn-palette: mat-palette($custom-orange);
+$primary-palette: mat-palette($custom-primary);
+$accent-palette: mat-palette($custom-accent);
+$warn-palette: mat-palette($custom-warn);
 
 $info-palette: mat-palette($mat-pink);
 $success-palette: mat-palette($mat-green);
