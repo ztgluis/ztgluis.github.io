@@ -8,7 +8,8 @@ ul {
 }
 
 .page-container {
-    margin: 1em 0.1em;
+    margin: 1em;
+    margin-left: 0.5em;
 }
 
 .mat-progress-spinner {
@@ -17,9 +18,11 @@ ul {
 }
 
 mat-drawer-container {
-    flex: 0.99; // extends the width of mat drawer to fill screen (instead of adjusting to content)
     .mat-drawer {
         background: transparent;
+        .mat-card {
+            margin-right: 0.5em;
+        }
     }
     .mat-drawer-side {
         border-right: none;
