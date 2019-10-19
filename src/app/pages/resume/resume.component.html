@@ -46,12 +46,14 @@
                             "
                         ></div>
                         <ng-template #skills>
-                            <span
-                                class="m-2"
+                            <button
+                                mat-raised-button
+                                color="accent"
+                                class="m-1"
                                 *ngFor="let content of section.contents"
                             >
-                                <button mat-button>{{ content }}</button>
-                            </span>
+                                {{ content }}
+                            </button>
                         </ng-template>
                         <ng-template #experience>
                             <div *ngFor="let content of section.contents">
