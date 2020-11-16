@@ -1,7 +1,7 @@
 @import '~@angular/material/theming';
 
-$primary-palette: mat-palette($mat-blue-gray, 900);
-$accent-palette: mat-palette($mat-blue-gray);
+$primary-palette: mat-palette($mat-blue);
+$accent-palette: mat-palette($mat-blue, 800);
 $warn-palette: mat-palette($mat-red);
 
 $info-palette: mat-palette($mat-blue);
