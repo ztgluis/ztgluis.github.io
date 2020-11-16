@@ -30,10 +30,17 @@ export class ResumeService {
         title: 'Work Experience',
         contents: [
             {
+                title: 'Twitter',
+                subtitle: 'Engineering Manager',
+                startDate: 'November 2020',
+                endDate: 'Present',
+                bulletpoints: []
+            },
+            {
                 title: 'Capital One',
                 subtitle: 'Manager, Software Engineering',
                 startDate: 'July 2019',
-                endDate: 'Present',
+                endDate: 'November 2020',
                 bulletpoints: [
                     `People Manager for a software engineering team of 5 developers`,
                     `Individual Contributor leading the decomposition of monolithic application into micro-service architecture, automated the CI/CD processes and management of AWS resources`,
