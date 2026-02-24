@@ -12,7 +12,7 @@ ul {
     margin-left: 0.5em;
 }
 
-.mat-progress-spinner {
+.mat-mdc-progress-spinner {
     display: inline-block;
     vertical-align: middle;
 }
@@ -20,7 +20,7 @@ ul {
 mat-drawer-container {
     .mat-drawer {
         background: transparent;
-        .mat-card {
+        .mat-mdc-card {
             margin-right: 0.5em;
         }
     }

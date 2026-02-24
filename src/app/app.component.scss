@@ -6,10 +6,9 @@
 .main-container {
     display: flex;
     flex: 1;
-    // height: calc(100% - 64px); // 64px for each toolbar (header and footer)
 }
 
 // Properly align menu icon with nav icons
-.mat-toolbar-single-row {
+.mat-toolbar-row {
     padding: 0 13px;
 }

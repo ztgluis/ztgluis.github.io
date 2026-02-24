@@ -1,9 +1,7 @@
-@import '~@angular/material/theming';
+@use '@angular/material' as mat;
 
 /**
- * Example of Custom Palette
- * Use a Material Palette generator such as:
- * http://mcg.mbitson.com/
+ * Custom Palette generated with http://mcg.mbitson.com/
  */
 
 $custom-primary: (
@@ -105,15 +103,17 @@ $custom-warn: (
     )
 );
 
-$primary-palette: mat-palette($custom-primary);
-$accent-palette: mat-palette($custom-accent);
-$warn-palette: mat-palette($custom-warn);
+$primary-palette: mat.m2-define-palette($custom-primary);
+$accent-palette: mat.m2-define-palette($custom-accent);
+$warn-palette: mat.m2-define-palette($custom-warn);
 
-$info-palette: mat-palette($mat-pink);
-$success-palette: mat-palette($mat-green);
-$neutral-palette: mat-palette($mat-blue-gray);
-$light-palette: mat-palette($mat-gray, 100);
+$theme: mat.m2-define-light-theme((
+    color: (
+        primary: $primary-palette,
+        accent: $accent-palette,
+        warn: $warn-palette
+    )
+));
 
-$theme: mat-light-theme($primary-palette, $accent-palette, $warn-palette);
-
-@import 'build-theme';
+@include mat.core();
+@include mat.all-component-themes($theme);

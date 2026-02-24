@@ -1,13 +1,24 @@
-import { enableProdMode } from '@angular/core';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { APP_BASE_HREF, PlatformLocation } from '@angular/common';
+import { provideHttpClient } from '@angular/common/http';
+import { bootstrapApplication } from '@angular/platform-browser';
+import { provideAnimations } from '@angular/platform-browser/animations';
+import { provideRouter } from '@angular/router';
+import { AppComponent } from './app/app.component';
+import { appRoutes } from './app/app.routing';
 
-import { AppModule } from './app/app.module';
-import { environment } from './environments/environment';
-
-if (environment.production) {
-    enableProdMode();
+function getBaseHref(platformLocation: PlatformLocation): string {
+    return platformLocation.getBaseHrefFromDOM();
 }
 
-platformBrowserDynamic()
-    .bootstrapModule(AppModule)
-    .catch(err => console.log(err));
+bootstrapApplication(AppComponent, {
+    providers: [
+        provideAnimations(),
+        provideHttpClient(),
+        provideRouter(appRoutes),
+        {
+            provide: APP_BASE_HREF,
+            useFactory: getBaseHref,
+            deps: [PlatformLocation]
+        }
+    ]
+}).catch(err => console.error(err));

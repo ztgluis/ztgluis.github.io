@@ -1,5 +1,4 @@
-import { NgModule } from '@angular/core';
-import { Route, RouterModule } from '@angular/router';
+import { Route } from '@angular/router';
 import { NavItem, RouteData } from '@app/app.model';
 
 /**
@@ -19,8 +18,10 @@ export const appRoutes: CustomRoute[] = [
     },
     {
         path: 'resume',
-        loadChildren: () =>
-            import('./pages/resume/resume.module').then(m => m.ResumeModule),
+        loadComponent: () =>
+            import('./pages/resume/resume.component').then(
+                m => m.ResumeComponent
+            ),
         data: {
             title: 'Resume Page',
             name: 'Resume',
@@ -46,9 +47,3 @@ export function getAppNav(): NavItem[] {
         return acc;
     }, []);
 }
-
-@NgModule({
-    imports: [RouterModule.forRoot(appRoutes)],
-    exports: [RouterModule]
-})
-export class RoutingModule {}
