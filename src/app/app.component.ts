@@ -1,5 +1,5 @@
-import { APP_BASE_HREF, AsyncPipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
+import { AsyncPipe } from '@angular/common';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -12,8 +12,6 @@ import { getAppNav } from '@app/app.routing';
 import { SettingsService } from '@app/shared/services/settings.service';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { environment } from '../environments/environment';
-
 @Component({
     selector: 'zgi-root',
     templateUrl: './app.component.html',
@@ -31,8 +29,6 @@ import { environment } from '../environments/environment';
 ]
 })
 export class AppComponent {
-    mapsKey = environment.mapsKey;
-
     isGtXs$: Observable<boolean> = this.breakpointObserver
         .observe('(min-width: 600px)')
         .pipe(map(result => result.matches));
@@ -43,13 +39,12 @@ export class AppComponent {
         private settingsService: SettingsService,
         private breakpointObserver: BreakpointObserver,
         matIconRegistry: MatIconRegistry,
-        domSanitizer: DomSanitizer,
-        @Inject(APP_BASE_HREF) private baseHref: string
+        domSanitizer: DomSanitizer
     ) {
         matIconRegistry.addSvgIcon(
             'github',
             domSanitizer.bypassSecurityTrustResourceUrl(
-                `../${this.baseHref}/assets/img/github-circle-white-transparent.svg`
+                'assets/img/github-circle-white-transparent.svg'
             )
         );
     }

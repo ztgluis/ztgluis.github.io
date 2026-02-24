@@ -17,15 +17,26 @@ export const StorageKeys = {
     providedIn: 'root'
 })
 export class SettingsService {
+    private readonly themeLink: HTMLLinkElement | null;
+    private readonly defaultThemeHref: string;
+
     constructor(
         @Inject(DOCUMENT) private document: HTMLDocument,
         public storageService: StorageService
     ) {
-        this.setTheme(this.selectedTheme);
+        this.themeLink = this.document.querySelector('link[href*="-theme"]') as HTMLLinkElement | null;
+        // Preserve the (potentially hashed) href injected by the build
+        this.defaultThemeHref = this.themeLink?.getAttribute('href') || Themes.default;
+
+        const stored = this.storageService.get(StorageKeys.theme);
+        if (stored && stored !== Themes.default) {
+            this.setTheme(stored);
+        } else {
+            this.selectedTheme = Themes.default;
+        }
     }
 
-    selectedTheme =
-        this.storageService.get(StorageKeys.theme) || Themes.default;
+    selectedTheme = Themes.default;
 
     switchTheme() {
         switch (this.selectedTheme) {
@@ -40,11 +51,11 @@ export class SettingsService {
         }
     }
 
-    setTheme(theme) {
+    setTheme(theme: string) {
         this.selectedTheme = theme;
-        const link = this.document.querySelector('link[href*="-theme"]');
-        if (link) {
-            link['href'] = theme;
+        if (this.themeLink) {
+            const href = theme === Themes.default ? this.defaultThemeHref : theme;
+            this.themeLink.setAttribute('href', href);
         }
         this.storageService.set(StorageKeys.theme, theme);
     }
