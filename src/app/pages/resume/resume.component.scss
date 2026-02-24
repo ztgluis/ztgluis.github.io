@@ -1,33 +1,200 @@
 :host {
-    display: flex;
-    flex: 1;
+  display: block;
+  width: 100%;
 }
 
-ul {
-    padding-inline-start: 20px;
+.resume-page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 16px 16px 48px;
+
+  @media (min-width: 600px) {
+    padding: 24px 24px 64px;
+  }
 }
 
-.page-container {
-    margin: 1em;
-    margin-left: 0.5em;
+.hero-card,
+.section-card {
+  margin: 0 0 20px !important;
+  border-radius: 8px !important;
+
+  @media (min-width: 600px) {
+    margin-bottom: 24px !important;
+  }
 }
 
-.mat-mdc-progress-spinner {
-    display: inline-block;
-    vertical-align: middle;
+/* HERO */
+.hero-card mat-card-content {
+  padding: 24px !important;
 }
 
-mat-drawer-container {
-    .mat-drawer {
-        background: transparent;
-        .mat-mdc-card {
-            margin-right: 0.5em;
-        }
-    }
-    .mat-drawer-side {
-        border-right: none;
-    }
-    mat-drawer.sidenav {
-        width: 300px;
-    }
+.hero-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  text-align: center;
+
+  &.hero-desktop {
+    flex-direction: row;
+    align-items: flex-start;
+    text-align: left;
+  }
+}
+
+.hero-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+
+  .hero-desktop & {
+    width: 140px;
+    height: 140px;
+  }
+}
+
+.hero-text { flex: 1; }
+
+.hero-name {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0 0 4px;
+  line-height: 1.2;
+}
+
+.hero-title {
+  font-size: 1.1rem;
+  font-weight: 400;
+  opacity: 0.75;
+  margin: 0 0 12px;
+}
+
+.hero-divider { margin: 12px 0 16px !important; }
+
+.hero-bio {
+  font-size: 0.92rem;
+  line-height: 1.65;
+  opacity: 0.85;
+  margin-bottom: 8px;
+
+  &:last-child { margin-bottom: 0; }
+}
+
+/* SECTION CARDS */
+.section-card mat-card-header { padding: 16px 20px 12px !important; }
+.section-card mat-card-content.section-content { padding: 20px !important; }
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.section-icon {
+  font-size: 22px;
+  width: 22px;
+  height: 22px;
+
+  &.icon-skills    { color: #1976d2; }
+  &.icon-work      { color: #388e3c; }
+  &.icon-education { color: #7b1fa2; }
+  &.icon-projects  { color: #f57c00; }
+}
+
+/* SKILLS */
+mat-chip-set {
+  display: flex !important;
+  flex-wrap: wrap;
+  gap: 8px;
+
+  mat-chip { font-size: 0.85rem; }
+}
+
+/* TIMELINE */
+.timeline {
+  position: relative;
+  padding-left: 28px;
+  border-left: 2px solid rgba(128,128,128,0.3);
+}
+
+.timeline-entry {
+  position: relative;
+  padding-bottom: 28px;
+
+  &.timeline-last { padding-bottom: 0; }
+}
+
+.timeline-dot {
+  position: absolute;
+  left: -36px;
+  top: 4px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #388e3c;
+  border: 2px solid white;
+  box-shadow: 0 0 0 2px #388e3c;
+}
+
+.timeline-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.timeline-company {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.timeline-date {
+  font-size: 0.82rem;
+  opacity: 0.65;
+}
+
+.timeline-role {
+  font-size: 0.9rem;
+  font-weight: 500;
+  opacity: 0.8;
+  margin-bottom: 6px;
+}
+
+.timeline-bullets {
+  padding-inline-start: 18px;
+  margin: 6px 0 0;
+
+  li {
+    font-size: 0.88rem;
+    line-height: 1.6;
+    margin-bottom: 2px;
+  }
+}
+
+/* EDUCATION */
+.edu-entry { padding: 4px 0; }
+.edu-institution { font-size: 1rem; font-weight: 700; margin-bottom: 2px; }
+.edu-degree { font-size: 0.9rem; font-weight: 500; opacity: 0.8; margin-bottom: 4px; }
+.edu-date { font-size: 0.82rem; opacity: 0.65; }
+
+/* PROJECTS */
+.project-entry { padding: 4px 0 12px; }
+.project-title { font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
+.project-link { font-size: 0.85rem; word-break: break-all; display: block; margin-bottom: 6px; }
+.project-divider { margin: 8px 0 16px !important; }
+
+/* RESPONSIVE */
+@media (max-width: 599px) {
+  .hero-name { font-size: 1.6rem; }
+  .hero-avatar { width: 100px; height: 100px; }
+  .section-header { font-size: 1.05rem; }
+  .timeline { padding-left: 20px; }
+  .timeline-dot { left: -28px; }
+  .timeline-header { flex-direction: column; gap: 2px; }
 }

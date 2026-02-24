@@ -1,11 +1,10 @@
-import { AsyncPipe } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { MatExpansionModule } from '@angular/material/expansion';
-import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { Observable } from 'rxjs';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatIconModule } from '@angular/material/icon';
 import { map } from 'rxjs/operators';
 import { ResumeService } from './resume.service';
 
@@ -13,34 +12,22 @@ import { ResumeService } from './resume.service';
     selector: 'zgi-resume',
     templateUrl: './resume.component.html',
     styleUrls: ['./resume.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
     imports: [
-    AsyncPipe,
-    MatExpansionModule,
-    MatButtonModule,
-    MatCardModule,
-    MatSidenavModule
-]
+        MatCardModule,
+        MatChipsModule,
+        MatDividerModule,
+        MatIconModule,
+    ]
 })
-export class ResumeComponent implements OnInit {
-    // Loading indicator
-    loading: boolean;
+export class ResumeComponent {
+    isGtSm = toSignal(
+        inject(BreakpointObserver)
+            .observe('(min-width: 960px)')
+            .pipe(map(result => result.matches)),
+        { initialValue: false }
+    );
 
-    // Open sidenav
-    sidenavOpen: boolean;
-
-    isGtSm$: Observable<boolean> = this.breakpointObserver
-        .observe('(min-width: 960px)')
-        .pipe(map(result => result.matches));
-
-    sections: Observable<any>;
-
-    constructor(
-        private breakpointObserver: BreakpointObserver,
-        public resumeService: ResumeService
-    ) {}
-
-    ngOnInit() {
-        this.sections = this.resumeService.getSections();
-    }
+    sections = toSignal(inject(ResumeService).getSections());
 }

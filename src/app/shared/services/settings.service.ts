@@ -1,5 +1,5 @@
 import { DOCUMENT } from '@angular/common';
-import { Inject, Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { StorageService } from './storage.service';
 
 export const Themes = {
@@ -17,16 +17,18 @@ export const StorageKeys = {
     providedIn: 'root'
 })
 export class SettingsService {
+    private document = inject(DOCUMENT);
+    storageService = inject(StorageService);
+
     private readonly themeLink: HTMLLinkElement | null;
     private readonly defaultThemeHref: string;
 
-    constructor(
-        @Inject(DOCUMENT) private document: HTMLDocument,
-        public storageService: StorageService
-    ) {
+    selectedTheme = Themes.default;
+
+    constructor() {
         this.themeLink = this.document.querySelector('link[href*="-theme"]') as HTMLLinkElement | null;
         // Preserve the (potentially hashed) href injected by the build
-        this.defaultThemeHref = this.themeLink?.getAttribute('href') || Themes.default;
+        this.defaultThemeHref = this.themeLink?.getAttribute('href') ?? Themes.default;
 
         const stored = this.storageService.get(StorageKeys.theme);
         if (stored && stored !== Themes.default) {
@@ -36,9 +38,7 @@ export class SettingsService {
         }
     }
 
-    selectedTheme = Themes.default;
-
-    switchTheme() {
+    switchTheme(): void {
         switch (this.selectedTheme) {
             case Themes.default:
                 this.setTheme(Themes.dark);
@@ -51,7 +51,7 @@ export class SettingsService {
         }
     }
 
-    setTheme(theme: string) {
+    setTheme(theme: string): void {
         this.selectedTheme = theme;
         if (this.themeLink) {
             const href = theme === Themes.default ? this.defaultThemeHref : theme;
@@ -60,11 +60,11 @@ export class SettingsService {
         this.storageService.set(StorageKeys.theme, theme);
     }
 
-    setLayout(isDefault) {
+    setLayout(isDefault: boolean): void {
         this.storageService.set(StorageKeys.layout, isDefault);
     }
 
-    getLayout() {
+    getLayout(): string | null {
         return this.storageService.get(StorageKeys.layout);
     }
 }

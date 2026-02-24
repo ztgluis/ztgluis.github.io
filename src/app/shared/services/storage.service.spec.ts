@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 import { StorageService } from './storage.service';
+
 describe('StorageService', () => {
     let service: StorageService;
 
     beforeEach(() => {
-        const spy = jasmine.createSpyObj('HttpService', ['get']);
         TestBed.configureTestingModule({});
-        service = TestBed.get(StorageService);
+        service = TestBed.inject(StorageService);
     });
 
     it('should be created', () => {
@@ -20,10 +20,7 @@ describe('StorageService', () => {
         });
         it('should store an object', () => {
             const result = JSON.parse(
-                service.set('someKey', {
-                    prop1: 'value1',
-                    prop2: 'value2'
-                })
+                service.set('someKey', { prop1: 'value1', prop2: 'value2' })
             );
             expect(result).toBeDefined();
             expect(result.prop1).toEqual('value1');
@@ -42,14 +39,11 @@ describe('StorageService', () => {
             expect(result).toEqual('some string');
         });
         it('should retrieve an object', () => {
-            service.set('someObj', {
-                prop1: 'value1',
-                prop2: 'value2'
-            });
-            const result = service.get('someObj');
+            service.set('someObj', { prop1: 'value1', prop2: 'value2' });
+            const result = service.get<{ prop1: string; prop2: string }>('someObj');
             expect(result).toBeDefined();
-            expect(result.prop1).toEqual('value1');
-            expect(result.prop2).toEqual('value2');
+            expect(result!.prop1).toEqual('value1');
+            expect(result!.prop2).toEqual('value2');
         });
     });
 

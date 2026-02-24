@@ -1,5 +1,5 @@
-import { AsyncPipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -10,8 +10,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { getAppNav } from '@app/app.routing';
 import { SettingsService } from '@app/shared/services/settings.service';
-import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+
 @Component({
     selector: 'zgi-root',
     templateUrl: './app.component.html',
@@ -19,37 +19,36 @@ import { map } from 'rxjs/operators';
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
     imports: [
-    AsyncPipe,
-    RouterLink,
-    RouterOutlet,
-    MatToolbarModule,
-    MatButtonModule,
-    MatIconModule,
-    MatTooltipModule
-]
+        RouterLink,
+        RouterOutlet,
+        MatToolbarModule,
+        MatButtonModule,
+        MatIconModule,
+        MatTooltipModule,
+    ]
 })
 export class AppComponent {
-    isGtXs$: Observable<boolean> = this.breakpointObserver
-        .observe('(min-width: 600px)')
-        .pipe(map(result => result.matches));
+    private settingsService = inject(SettingsService);
+
+    isGtXs = toSignal(
+        inject(BreakpointObserver)
+            .observe('(min-width: 600px)')
+            .pipe(map(result => result.matches)),
+        { initialValue: false }
+    );
 
     navLinks = getAppNav();
 
-    constructor(
-        private settingsService: SettingsService,
-        private breakpointObserver: BreakpointObserver,
-        matIconRegistry: MatIconRegistry,
-        domSanitizer: DomSanitizer
-    ) {
-        matIconRegistry.addSvgIcon(
+    constructor() {
+        inject(MatIconRegistry).addSvgIcon(
             'github',
-            domSanitizer.bypassSecurityTrustResourceUrl(
+            inject(DomSanitizer).bypassSecurityTrustResourceUrl(
                 'assets/img/github-circle-white-transparent.svg'
             )
         );
     }
 
-    switchTheme() {
+    switchTheme(): void {
         this.settingsService.switchTheme();
     }
 }

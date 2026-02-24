@@ -1,8 +1,9 @@
 import { APP_BASE_HREF } from '@angular/common';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatMenuModule } from '@angular/material/menu';
-import { RouterTestingModule } from '@angular/router/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideHttpClient } from '@angular/common/http';
+import { provideNoopAnimations } from '@angular/platform-browser/animations';
+import { provideRouter } from '@angular/router';
 import { AppComponent } from './app.component';
 import { SettingsService } from './shared/services/settings.service';
 
@@ -11,7 +12,7 @@ describe('AppComponent', () => {
     let fixture: ComponentFixture<AppComponent>;
     let settingsServiceSpy: jasmine.SpyObj<SettingsService>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         const spy = jasmine.createSpyObj('SettingsService', [
             'switchTheme',
             'setLayout',
@@ -19,21 +20,20 @@ describe('AppComponent', () => {
         ]);
 
         TestBed.configureTestingModule({
-            imports: [RouterTestingModule, MatMenuModule],
-            declarations: [AppComponent],
+            imports: [AppComponent],
             providers: [
                 { provide: SettingsService, useValue: spy },
-                {
-                    provide: APP_BASE_HREF,
-                    useValue: '/'
-                }
+                { provide: APP_BASE_HREF, useValue: '/' },
+                provideRouter([]),
+                provideHttpClient(),
+                provideNoopAnimations(),
             ],
             schemas: [NO_ERRORS_SCHEMA]
         }).compileComponents();
 
         fixture = TestBed.createComponent(AppComponent);
         component = fixture.debugElement.componentInstance;
-        settingsServiceSpy = TestBed.get(SettingsService);
+        settingsServiceSpy = TestBed.inject(SettingsService);
     }));
 
     it('should create', () => {
@@ -41,7 +41,7 @@ describe('AppComponent', () => {
     });
 
     describe('switchTheme()', () => {
-        it('should switch the theme', async(() => {
+        it('should switch the theme', waitForAsync(() => {
             fixture.detectChanges();
             component.switchTheme();
             expect(settingsServiceSpy.switchTheme).toHaveBeenCalled();

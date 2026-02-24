@@ -1,132 +1,147 @@
-<mat-drawer-container class="sidenav-container" autosize>
-  <mat-drawer
-    class="sidenav"
-    mode="side"
-    [opened]="isGtSm$ | async"
-    >
-    @if (isGtSm$ | async) {
-      <mat-card>
-        <mat-card-content>
-          <img
-            class="float-left m-2"
-            src="https://avatars3.githubusercontent.com/u/25552995?s=235&v=4"
-            />
-          <div>
-            <div class="lead">Luis Gutierrez</div>
-            <p>
-              Software Engineering Manager with strong background on
-              Front-End Development and over 10 years of experience
-              delivering web applications ranging from public-facing
-              eCommerce websites to internal-use Cyber Security platforms.
-            </p>
-            <p>
-              Passionate about solving problems through technology,
-              leading software engineers to build best-in-class enterprise
-              applications and empower users with thoughtfully crafted
-              experiences.
-            </p>
-            <p>
-              Feel free to connect if you would like to collaborate or are
-              seeking Software Development opportunities!
-            </p>
-          </div>
-        </mat-card-content>
-      </mat-card>
-    }
-  </mat-drawer>
+<div class="resume-page">
+  @if (sections(); as s) {
 
-  <mat-drawer-content>
-    @if (!(isGtSm$ | async)) {
-      <mat-card>
-        <mat-card-content>
-          <img
-            class="float-left m-2"
+    <!-- HERO -->
+    <mat-card class="hero-card">
+      <mat-card-content>
+        <div class="hero-inner" [class.hero-desktop]="isGtSm()">
+          <img class="hero-avatar"
             src="https://avatars3.githubusercontent.com/u/25552995?s=235&v=4"
-            />
-          <div>
-            <div class="lead">Luis Gutierrez</div>
-            <p>
-              Software Engineering Manager with strong background on
-              Front-End Development and over 10 years of experience
-              delivering web applications ranging from public-facing
-              eCommerce websites to internal-use Cyber Security platforms.
+            alt="Luis Gutierrez" />
+          <div class="hero-text">
+            <h1 class="hero-name">Luis Gutierrez</h1>
+            <p class="hero-title">Software Engineering Manager</p>
+            <mat-divider class="hero-divider"></mat-divider>
+            <p class="hero-bio">
+              Software Engineering Manager with a strong background in Front-End
+              Development and over 10 years of experience delivering web
+              applications — from public-facing eCommerce sites to internal-use
+              Cyber Security platforms.
             </p>
-            <p>
-              Passionate about solving problems through technology,
-              leading software engineers to build best-in-class enterprise
-              applications and empower users with thoughtfully crafted
-              experiences.
+            <p class="hero-bio">
+              Passionate about solving problems through technology, leading
+              engineers to build best-in-class enterprise applications, and
+              empowering users with thoughtfully crafted experiences.
             </p>
-            <p>
-              Feel free to connect if you would like to collaborate or are
-              seeking Software Development opportunities!
+            <p class="hero-bio">
+              Feel free to connect if you'd like to collaborate or are seeking
+              Software Development opportunities!
             </p>
           </div>
-        </mat-card-content>
-      </mat-card>
-    }
-    <div class="page-container">
-      <mat-accordion multi>
-        @for (section of sections | async; track section) {
-          <mat-expansion-panel
-            expanded
-            >
-            <mat-expansion-panel-header>
-              <h5>{{ section.title }}</h5>
-            </mat-expansion-panel-header>
-            <ng-template matExpansionPanelContent>
-              @if (
-                section.title === 'Skills') {
-                @for (content of section.contents; track content) {
-                  <button
-                    mat-raised-button
-                    color="accent"
-                    class="m-1"
-                    >
-                    {{ content }}
-                  </button>
-                }
-              } @else {
-                @for (content of section.contents; track content) {
-                  <div>
-                    <h5>{{ content.title }}</h5>
-                    <div>
-                      @if (
-                        section.title === 'Projects') {
-                        <a [href]="content.subtitle">
-                          {{ content.subtitle }}
-                        </a>
-                      } @else {
-                        <strong>{{ content.subtitle }}</strong>
-                      }
-                    </div>
-                    @if (content.startDate) {
-                      <div
-                        class="text-muted"
-                        >
-                        {{ content.startDate }} -
-                        {{ content.endDate }}
-                      </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- SKILLS -->
+    <mat-card class="section-card">
+      <mat-card-header>
+        <mat-card-title>
+          <span class="section-header">
+            <mat-icon class="section-icon icon-skills">code</mat-icon>
+            Skills
+          </span>
+        </mat-card-title>
+      </mat-card-header>
+      <mat-divider></mat-divider>
+      <mat-card-content class="section-content">
+        <mat-chip-set aria-label="Skills">
+          @for (skill of s[0].contents; track skill) {
+            <mat-chip>{{ skill }}</mat-chip>
+          }
+        </mat-chip-set>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- WORK EXPERIENCE (timeline) -->
+    <mat-card class="section-card">
+      <mat-card-header>
+        <mat-card-title>
+          <span class="section-header">
+            <mat-icon class="section-icon icon-work">work</mat-icon>
+            Work Experience
+          </span>
+        </mat-card-title>
+      </mat-card-header>
+      <mat-divider></mat-divider>
+      <mat-card-content class="section-content">
+        <div class="timeline">
+          @for (job of s[2].contents; track job.title; let last = $last) {
+            <div class="timeline-entry" [class.timeline-last]="last">
+              <div class="timeline-dot"></div>
+              <div class="timeline-body">
+                <div class="timeline-header">
+                  <span class="timeline-company">{{ job.title }}</span>
+                  <span class="timeline-date">{{ job.startDate }} – {{ job.endDate }}</span>
+                </div>
+                <div class="timeline-role">{{ job.subtitle }}</div>
+                @if (job.bulletpoints?.length > 0) {
+                  <ul class="timeline-bullets">
+                    @for (bp of job.bulletpoints; track bp) {
+                      <li>{{ bp }}</li>
                     }
-                    <ul class="mt-3">
-                      @for (
-                        bulletpoint of content.bulletpoints
-                        ; track
-                        bulletpoint) {
-                        <li
-                          >
-                          {{ bulletpoint }}
-                        </li>
-                      }
-                    </ul>
-                  </div>
+                  </ul>
                 }
-              }
-            </ng-template>
-          </mat-expansion-panel>
-        }
-      </mat-accordion>
-    </div>
-  </mat-drawer-content>
-</mat-drawer-container>
+              </div>
+            </div>
+          }
+        </div>
+      </mat-card-content>
+    </mat-card>
 
+    <!-- EDUCATION -->
+    <mat-card class="section-card">
+      <mat-card-header>
+        <mat-card-title>
+          <span class="section-header">
+            <mat-icon class="section-icon icon-education">school</mat-icon>
+            Education
+          </span>
+        </mat-card-title>
+      </mat-card-header>
+      <mat-divider></mat-divider>
+      <mat-card-content class="section-content">
+        @for (edu of s[3].contents; track edu.title) {
+          <div class="edu-entry">
+            <div class="edu-institution">{{ edu.title }}</div>
+            <div class="edu-degree">{{ edu.subtitle }}</div>
+            <div class="edu-date">{{ edu.startDate }} – {{ edu.endDate }}</div>
+          </div>
+        }
+      </mat-card-content>
+    </mat-card>
+
+    <!-- PROJECTS -->
+    <mat-card class="section-card">
+      <mat-card-header>
+        <mat-card-title>
+          <span class="section-header">
+            <mat-icon class="section-icon icon-projects">folder_open</mat-icon>
+            Projects
+          </span>
+        </mat-card-title>
+      </mat-card-header>
+      <mat-divider></mat-divider>
+      <mat-card-content class="section-content">
+        @for (project of s[1].contents; track project.title; let last = $last) {
+          <div class="project-entry">
+            <div class="project-title">{{ project.title }}</div>
+            <a class="project-link" [href]="project.subtitle" target="_blank" rel="noopener">
+              {{ project.subtitle }}
+            </a>
+            @if (project.bulletpoints?.length > 0) {
+              <ul class="timeline-bullets">
+                @for (bp of project.bulletpoints; track bp) {
+                  <li>{{ bp }}</li>
+                }
+              </ul>
+            }
+          </div>
+          @if (!last) {
+            <mat-divider class="project-divider"></mat-divider>
+          }
+        }
+      </mat-card-content>
+    </mat-card>
+
+  }
+</div>

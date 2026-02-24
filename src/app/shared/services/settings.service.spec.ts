@@ -8,13 +8,12 @@ describe('SettingsService', () => {
 
     beforeEach(() => {
         const spy = jasmine.createSpyObj('StorageService', ['set', 'get']);
-        const navigatorSpy = jasmine.createSpyObj;
         TestBed.configureTestingModule({
             providers: [{ provide: StorageService, useValue: spy }]
         });
 
-        service = TestBed.get(SettingsService);
-        storageServiceSpy = TestBed.get(StorageService);
+        service = TestBed.inject(SettingsService);
+        storageServiceSpy = TestBed.inject(StorageService) as jasmine.SpyObj<StorageService>;
     });
 
     it('should be created', () => {
@@ -57,6 +56,7 @@ describe('SettingsService', () => {
             expect(service.selectedTheme).toEqual(Themes.default);
         });
     });
+
     describe('#setLayout', () => {
         it('should set default layout when receiving true', () => {
             service.setLayout(true);
@@ -73,6 +73,7 @@ describe('SettingsService', () => {
             );
         });
     });
+
     describe('#getLayout', () => {
         it('should get layout', () => {
             service.getLayout();

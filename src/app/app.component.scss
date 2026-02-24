@@ -7,8 +7,18 @@
     display: flex;
     flex: 1;
 }
-
-// Properly align menu icon with nav icons
 .mat-toolbar-row {
     padding: 0 13px;
+}
+.app-toolbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+.app-footer {
+    padding: 16px;
+    text-align: center;
+    font-size: 0.85rem;
+    opacity: 0.7;
+    border-top: 1px solid rgba(128, 128, 128, 0.25);
 }

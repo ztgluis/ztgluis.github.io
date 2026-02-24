@@ -30,11 +30,31 @@ export class ResumeService {
         title: 'Work Experience',
         contents: [
             {
+                title: 'Meta',
+                subtitle: 'Engineering Manager',
+                startDate: 'July 2022',
+                endDate: 'Present',
+                bulletpoints: [
+                    `Lead multiple Static Analysis teams (scaled from 2 to 5) within Meta's Product Security Program Analysis organization, building enterprise-scale Static Analysis infrastructure serving 35k+ engineers analyzing code changes across Meta's Hack, Python and Java.`,
+                    `Drive AI-Powered security initiatives that scale vulnerability detection and accelerate remediation across Meta's codebase.`,
+                    `Build high-performing distributed teams through people-first leadership and operational frameworks that enable autonomy.`,
+                    `Partner cross-functionally to align security investments with product and infrastructure.`
+                ]
+            },
+            {
                 title: 'Twitter',
                 subtitle: 'Engineering Manager',
                 startDate: 'November 2020',
-                endDate: 'Present',
-                bulletpoints: []
+                endDate: 'July 2022',
+                bulletpoints: [
+                    `Led Code Review and Code Search teams serving 2500+ developers across Twitter's Engineering organization, improving productivity through tooling optimization and developer experience research.`,
+                    `Scaled Code Review team from 4 to 8 engineers and accelerated team growth, promoting 3 engineers within the first year.`,
+                    `Improved Code Review workflows through systematic UX research with developers and key stakeholders, identifying and addressing critical pain points in Phabricator.`,
+                    `Enhanced Code Search capabilities by researching developer usage patterns of Sourcegraph and prioritizing high-impact feature improvements.`,
+                    `Established Customer Advisory Board creating direct feedback channels with engineering teams, improving transparency and enabling faster product iterations.`,
+                    `Designed and launched company-wide mentorship program pairing 36+ individual contributors and engineering managers to support career growth across the organization.`,
+                    `Introduced Agile development practices improving team collaboration, planning effectiveness and delivery predictability.`
+                ]
             },
             {
                 title: 'Capital One',

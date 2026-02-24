@@ -1,49 +1,29 @@
-<div class="wrapper">
-  <!-- Header -->
-  <mat-toolbar color="primary">
-    <!-- Responsive Title -->
-    @if (isGtXs$ | async) {
-      <button mat-button [routerLink]="['/']">
-        Luis Gutierrez
-      </button>
+<div class="wrapper mat-app-background">
+  <mat-toolbar color="primary" class="app-toolbar">
+    @if (isGtXs()) {
+      <button mat-button [routerLink]="['/']">Luis Gutierrez</button>
     } @else {
       <button mat-button [routerLink]="['/']">Luis</button>
     }
-
-    <!-- Toolbar Buttons -->
     <div class="ml-auto">
-      <div class="d-inline-block">
-        <button
-          mat-icon-button
-          (click)="switchTheme()"
-          matTooltip="Switch Theme"
-          >
-          <mat-icon>color_lens</mat-icon>
-        </button>
-      </div>
-
-      <!-- Github link -->
-      <a
-        mat-icon-button
-        href="https://github.com/ztgluis/ztgluis.github.io"
-        >
+      <button mat-icon-button (click)="switchTheme()" matTooltip="Switch Theme">
+        <mat-icon>color_lens</mat-icon>
+      </button>
+      <a mat-icon-button href="https://github.com/ztgluis/ztgluis.github.io">
         <mat-icon svgIcon="github"></mat-icon>
       </a>
     </div>
   </mat-toolbar>
 
-  <div class="main-container mat-app-background">
+  <div class="main-container">
     <router-outlet></router-outlet>
   </div>
 
-  <!-- Footer -->
-  <mat-toolbar color="primary">
-    <div class="lead m-auto">
-      <span class="d-flex align-items-center">
-        Built with
-        <mat-icon class="mx-1 text-warn">favorite</mat-icon>
-        by Skynet
-      </span>
-    </div>
-  </mat-toolbar>
+  <footer class="app-footer">
+    <span class="d-flex align-items-center justify-content-center">
+      Built with
+      <mat-icon class="mx-1 text-warn" style="font-size:18px;width:18px;height:18px;">favorite</mat-icon>
+      by Skynet
+    </span>
+  </footer>
 </div>

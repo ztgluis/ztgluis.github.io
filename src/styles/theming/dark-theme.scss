@@ -14,3 +14,10 @@ $theme: mat.m2-define-dark-theme((
 
 @include mat.core();
 @include mat.all-component-themes($theme);
+
+// Angular Material v19 only defines --mat-app-* as CSS vars; Bootstrap's
+// body defaults (white bg, dark text) override them. Apply explicitly.
+body {
+    background-color: var(--mat-app-background-color);
+    color: var(--mat-app-text-color);
+}
